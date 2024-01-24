@@ -1,0 +1,17 @@
+controllers:
+    resource:
+        path: ../src/Controller/
+        namespace: App\Controller
+    type: attribute
+
+# login and generate JWT token
+api_login_check:
+    path: /api/users/token/login
+
+# refresh refreshToken
+api_refresh_token:
+    path: /api/users/token/refresh
+
+# invalidate refresh token
+api_token_invalidate:
+    path: /api/users/token/invalidate

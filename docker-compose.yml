@@ -1,0 +1,51 @@
+version: '3.5'
+
+services:
+  database:
+    container_name: database
+    image: mariadb:lts
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: app
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    ports:
+      - "3306:3306"
+    volumes:
+      - database:/var/lib/mysql
+    networks:
+      - course-management-system
+
+  phpmyadmin:
+    container_name: phpmyadmin
+    image: phpmyadmin/phpmyadmin:latest
+    environment:
+      PMA_HOST: database
+    ports:
+      - "8080:80"
+    depends_on:
+      - database
+    networks:
+      - course-management-system
+
+  app:
+    container_name: app
+    restart: always
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./:/app
+    depends_on:
+      - database
+    networks:
+      - course-management-system
+
+volumes:
+  database:
+
+networks:
+  course-management-system:
+    driver: bridge

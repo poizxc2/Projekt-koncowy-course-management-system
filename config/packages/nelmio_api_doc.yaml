@@ -1,0 +1,122 @@
+nelmio_api_doc:
+    documentation:
+        info:
+            title: Course-management-system
+            description: Course-management-system
+            version: 1.0.0
+        components:
+            securitySchemes:
+                PROFESSOR:
+                    type: http
+                    scheme: bearer
+                    bearerFormat: JWT
+                STUDENT:
+                    type: http
+                    scheme: bearer
+                    bearerFormat: JWT
+        security:
+            - Bearer: []
+
+        paths:
+            /api/doc:
+                get:
+                    security:
+                        -
+                    tags:
+                        - doc
+            /api/doc.json:
+                get:
+                    security:
+                        -
+                    tags:
+                        - doc
+
+            /api/users/token/login:
+                post:
+                    security:
+                        -
+                    tags:
+                        - Auth
+                    description: Login into the api
+                    requestBody:
+                        description: Json body
+                        required: true
+                        content:
+                            application/json:
+                                schema:
+                                    type: object
+                                    properties:
+                                        username:
+                                            type: string
+                                        password:
+                                            type: string
+                    responses:
+                        '200':
+                            description: Login successful
+                            content:
+                                application/json:
+                                    schema:
+                                        type: object
+                                        properties:
+                                            token:
+                                                type: string
+                                            refreshToken:
+                                                type: string
+            /api/users/token/refresh:
+                post:
+                    security:
+                        -
+                    tags:
+                        - Auth
+                    description: Refresh token
+                    requestBody:
+                        description: Json body
+                        required: true
+                        content:
+                            application/json:
+                                schema:
+                                    type: object
+                                    properties:
+                                        refreshToken:
+                                            type: string
+                    responses:
+                        '200':
+                            description: Login successful
+                            content:
+                                application/json:
+                                    schema:
+                                        type: object
+                                        properties:
+                                            token:
+                                                type: string
+                                            refreshToken:
+                                                type: string
+            /api/users/token/invalidate:
+                post:
+                    security:
+                        -
+                    tags:
+                        - Auth
+                    description: 'Logout'
+                    requestBody:
+                        description: Json body
+                        required: true
+                        content:
+                            application/json:
+                                schema:
+                                    type: object
+                                    properties:
+                                        refreshToken:
+                                            type: string
+
+                    responses:
+                        '200':
+                            description: Refresh token has been invalidated
+                            content:
+                                application/json:
+                                    example:
+                                        code: 200
+                                        message: 'The supplied refresh_token has been invalidated.'
+    areas:
+        path_patterns:
+            - ^/api(?!/doc$)
