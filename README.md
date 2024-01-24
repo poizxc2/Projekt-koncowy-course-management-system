@@ -4,6 +4,13 @@
 
     docker-compose up --build
 
+# Lista uczestników w projekcie
+
+1. Uladzislau Chukh
+2. Vladyslav Shtepan
+3. Kiryl Shakhnovich
+
+
 # Lista contenerów 
 
 1. <b>app</b>  port: 8000 (swagger doc: /api/doc) 
