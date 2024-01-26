@@ -28,6 +28,7 @@ COPY . .
 # 5. Start symfony server
 # 6. Block '0' server request
 CMD ["sh", "-c", "composer install \
+    && sleep 5 \
     && php bin/console lexik:jwt:generate-keypair --overwrite --no-interaction \
     && bin/console doctrine:migrations:migrate --no-interaction \
     && php bin/console doctrine:fixtures:load --no-interaction \
