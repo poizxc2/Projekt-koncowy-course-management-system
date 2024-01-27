@@ -20,17 +20,3 @@ RUN apt-get install -y symfony-cli
 
 WORKDIR /app/
 COPY . .
-
-# 1. Install composer dep.
-# 2. Create JWT auth keys
-# 3. Update database
-# 4. Push test data
-# 5. Start symfony server
-# 6. Block '0' server request
-CMD ["sh", "-c", "composer install \
-    && sleep 5 \
-    && php bin/console lexik:jwt:generate-keypair --overwrite --no-interaction \
-    && bin/console doctrine:migrations:migrate --no-interaction \
-    && php bin/console doctrine:fixtures:load --no-interaction \
-    && symfony server:start \
-    & tail -f /dev/null"]
