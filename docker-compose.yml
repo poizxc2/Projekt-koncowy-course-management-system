@@ -21,6 +21,16 @@ services:
     image: phpmyadmin/phpmyadmin:latest
     environment:
       PMA_HOST: database
+    command:
+      - /bin/sh
+      - -c
+      - |
+        composer install
+        sleep 5
+        php bin/console lexik:jwt:generate-keypair --overwrite --no-interaction
+        php bin/console doctrine:migrations:migrate --no-interaction
+        php bin/console doctrine:fixtures:load --no-interaction
+        symfony server:start
     ports:
       - "8080:80"
     depends_on:
